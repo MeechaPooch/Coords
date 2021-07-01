@@ -1,0 +1,6 @@
+name: Coords
+version: ${project.version}
+main: meechapooch.coords.Coords
+api-version: 1.17
+authors: [ MeechaPooch ]
+description: A minecraft plugin for managing, sharing and guiding players to coordinates
