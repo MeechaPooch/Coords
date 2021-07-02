@@ -11,8 +11,8 @@ import java.util.logging.Level;
 
 public class FileSaving {
 
-    public static final String SAVE_DIR = "./Coords/";
-    public static final String SAVE_PATH = SAVE_DIR + "coords.json";
+    public static final String SAVE_DIR = Coords.plugin.getDataFolder() + File.separator + "Coords";
+    public static final String SAVE_PATH = SAVE_DIR + File.separator + "coords.json";
     public static File saveFile = new File(SAVE_PATH);
 
     public static int lastId = 0;
