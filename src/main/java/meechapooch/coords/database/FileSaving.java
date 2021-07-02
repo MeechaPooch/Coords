@@ -15,11 +15,13 @@ public class FileSaving {
     public static final String SAVE_PATH = SAVE_DIR + "coords.json";
     public static File saveFile = new File(SAVE_PATH);
 
-
-    public static int nextId;
+    public static int nextId = 0;
 
     public static void saveDatabase() {
         JsonThing container = JsonThing.newMap();
+
+        // Next Id
+        container.put("nextId",nextId);
 
         // Index
         JsonThing index = JsonThing.newList();
@@ -81,6 +83,9 @@ public class FileSaving {
             Coords.index.clear();
             try {
                 JsonThing database = JsonThing.parse(FileUtils.readLineByLineJava8(SAVE_PATH));
+
+                // Set Next Id
+                nextId = database.get("nextId").asLong().intValue();
 
                 // Build Index
                 JsonThing index = database.get("index");
