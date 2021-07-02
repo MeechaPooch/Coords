@@ -17,7 +17,7 @@ public class FileSaving {
 
     public static int lastId = 0;
 
-    public static void saveDatabase() {
+    public static void writeDatabase() {
         JsonThing container = JsonThing.newMap();
 
         // Next Id
@@ -63,7 +63,9 @@ public class FileSaving {
                 personalListEntry.put("x",boi.coord.getX());
                 personalListEntry.put("y",boi.coord.getY());
                 personalListEntry.put("z",boi.coord.getZ());
+                personalList.add(personalListEntry);
             });
+            profileObject.put("personalList",personalList);
             profiles.add(profileObject);
         });
         container.put("profiles",profiles);
@@ -76,9 +78,12 @@ public class FileSaving {
         }
     }
 
-    public static void buildDatabase() {
+    public static void setupFileLocation() {
         File saveDir = new File(SAVE_DIR);
         saveDir.mkdirs();
+    }
+
+    public static void buildDatabase() {
         if (saveFile.exists()) {
             Coords.index.clear();
             try {
@@ -135,9 +140,5 @@ public class FileSaving {
                 Coords.getPlugin(Coords.class).getLogger().log(Level.SEVERE, "CRITICAL DATABAES FILE READING ERROR.");
             }
         }
-    }
-
-    public static void setupFileLocation() {
-
     }
 }
