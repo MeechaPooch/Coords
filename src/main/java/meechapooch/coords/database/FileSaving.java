@@ -31,7 +31,7 @@ public class FileSaving {
             listJson.put("name",list.getName());
             listJson.put("public",list.isPublic);
             JsonThing coordsList = JsonThing.newList();
-            list.coords.forEach(coord->{
+            list.coords.forEach((k,coord)->{
                 JsonThing coordObject = JsonThing.newMap();
                 coordObject.put("name",coord.getName());
                 coordObject.put("world",coord.coord.getWorld().getName());
@@ -56,7 +56,7 @@ public class FileSaving {
             });
             profileObject.put("lists",listIds);
             JsonThing personalList = JsonThing.newList();
-            profile.personal.forEach(boi->{
+            profile.personal.forEach((nm,boi)->{
                 JsonThing personalListEntry = JsonThing.newMap();
                 personalListEntry.put("name",boi.name);
                 personalListEntry.put("world",boi.coord.getWorld().getName());
@@ -96,7 +96,7 @@ public class FileSaving {
                 JsonThing index = database.get("index");
                 index.asListOfThings().forEach(list -> {
                     CoordsList newList = new CoordsList(list.get("name").asString(), list.get("id").asLong().intValue(), list.get("public").asBoolean());
-                    list.get("coods").asListOfThings().forEach(coord->{
+                    list.get("coords").asListOfThings().forEach(coord->{
                         CoordEntry newCoord = new CoordEntry(
                                 coord.get("name").asString(),
                                 Coords.plugin.getServer().getWorld(coord.get("world").asString()),
@@ -104,7 +104,7 @@ public class FileSaving {
                                 coord.get("y").asDouble(),
                                 coord.get("z").asDouble()
                         );
-                        newList.coords.add(newCoord);
+                        newList.coords.put(newCoord.getName().toLowerCase(),newCoord);
                     });
                     Coords.index.put(newList.id,newList);
                 });
@@ -122,7 +122,7 @@ public class FileSaving {
                                 coord.get("y").asDouble(),
                                 coord.get("z").asDouble()
                         );
-                        newProfile.personal.add(newCoord);
+                        newProfile.personal.put(newCoord.getName().toLowerCase(),newCoord);
                     });
                     // Add Shared List References
                     profile.get("lists").asListOfThings().forEach(listId->{
