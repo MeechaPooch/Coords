@@ -8,7 +8,15 @@ import java.util.List;
 public class CoordsList {
 
     String name;
-    LinkedList<CoordEntry> coords;
+    int id;
+    LinkedList<CoordEntry> coords = new LinkedList<>();
+    boolean isPublic;
+
+    public CoordsList(String name, int id, boolean isPublic) {
+        this.name = name;
+        this.id = id;
+        this.isPublic = isPublic;
+    }
 
     public String getName() {
         return name;

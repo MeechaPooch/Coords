@@ -14,35 +14,33 @@ import java.util.Map;
 
 public final class Coords extends JavaPlugin {
 
-    Map<String, PlayerProfile> profiles;
-    public static HashMap<String,CoordsList> globalLists;
-
+    public static Map<String, PlayerProfile> profiles;
+    public static HashMap<String, CoordsList> globalLists;
+    public static HashMap<Integer,CoordsList> index = new HashMap<>();
+    public static Coords plugin;
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
+        plugin = this;
 //        p.spigot().sendMessage(ChatMessageType.ACTION_BAR,new TextComponent("Test"));
         getLogger().info("YEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEET!");
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
     }
-
-
-
 
 
     public void makeNewList(Player owner, String name) {
-        CoordsList list = new CoordsList();
-        profiles.get(owner).add(list);
+        // TODO this
+//        CoordsList list = new CoordsList();
+//        profiles.get(owner).add(list);
     }
 
     public void shareList(CoordsList list, Player... players) {
-        for(Player player : players) {
+        for (Player player : players) {
             PlayerProfile profile = profiles.get(player.getName().toLowerCase());
-            if(profile.lists.containsKey(list.getName().toLowerCase())) //TODO Handle share conflict
+            if (profile.lists.containsKey(list.getName().toLowerCase())) //TODO Handle share conflict
                 profile.add(list);
         }
     }
