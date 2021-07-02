@@ -114,7 +114,7 @@ public class FileSaving {
                 profiles.asListOfThings().forEach(profile->{
                     PlayerProfile newProfile = new PlayerProfile(profile.get("name").asString());
                     // Build Personal List
-                    profiles.get("personalList").asListOfThings().forEach(coord->{
+                    profile.get("personalList").asListOfThings().forEach(coord->{
                         CoordEntry newCoord = new CoordEntry(
                                 coord.get("name").asString(),
                                 Coords.plugin.getServer().getWorld(coord.get("world").asString()),
