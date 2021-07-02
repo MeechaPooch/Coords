@@ -6,3 +6,6 @@
 [              (^)              ]
 
 signal in green
+
+flashing green and red(?)
+[     ARRIVED IN ONE PIECE!     ]

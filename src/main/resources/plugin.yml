@@ -4,3 +4,7 @@ main: meechapooch.coords.Coords
 api-version: 1.17
 authors: [ MeechaPooch ]
 description: A minecraft plugin for managing, sharing and guiding players to coordinates
+commands:
+  coords:
+    description: parent command to all coords plugin subcommands
+    usage: /coords [guide | add | remove | send | list | lists ]
