@@ -9,12 +9,12 @@ EXAMPLES:
 /coords guide 8453 57 -4324
 /coords guide 8453 -4324
 /coords guide bases/TurtleMasterPDX
-
+--
 /coords add: add coordinate to personal list
 USAGE
-
+--
 /coords remove: remove coordinate from personal list
-
+--
 /coords send
 
 <LIST COMMANDS>

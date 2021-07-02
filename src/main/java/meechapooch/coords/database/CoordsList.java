@@ -2,6 +2,7 @@ package meechapooch.coords.database;
 
 import org.bukkit.Location;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ public class CoordsList {
 
     String name;
     int id;
-    LinkedList<CoordEntry> coords = new LinkedList<>();
+    HashMap<String,CoordEntry> coords = new HashMap<>();
     boolean isPublic;
 
     public CoordsList(String name, int id, boolean isPublic) {
@@ -24,7 +25,7 @@ public class CoordsList {
 
     public List<String> getCoordNames() {
         LinkedList<String> ret = new LinkedList<>();
-        coords.forEach(coordEntry -> ret.add(coordEntry.getName()));
+        coords.forEach((k,coordEntry) -> ret.add(coordEntry.getName()));
         return ret;
     }
 }

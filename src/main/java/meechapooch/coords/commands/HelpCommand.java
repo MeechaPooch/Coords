@@ -1,15 +1,20 @@
 package meechapooch.coords.commands;
 
+import meechapooch.coords.Coords;
+import meechapooch.coords.database.PlayerProfile;
 import org.bukkit.command.CommandSender;
 
-public class HelpCommand implements SubCommand{
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class HelpCommand implements SubCommand {
     @Override
-    public boolean isSonsoleCompatible() {
+    public boolean isConsoleCompatible() {
         return true;
     }
 
     @Override
-    public boolean run(CommandSender sender, String[] args) {
+    public String run(CommandSender sender, PlayerProfile profile, String[] args) {
         sender.sendMessage("      ========== COORDS COMMANDS ==========\n" +
                 "<CORE COMMANDS>\n" +
                 "\n" +
@@ -31,6 +36,12 @@ public class HelpCommand implements SubCommand{
                 "\n" +
                 "<LIST COMMANDS>\n" +
                 "\n");
-        return true;
+        return null;
+    }
+
+    @Override
+    public List<String> autoComplete(CommandSender sender, PlayerProfile profile, String[] args) {
+        if(args.length == 1) return Coords.subCommands.keySet().stream().collect(Collectors.toList());
+        return null;
     }
 }

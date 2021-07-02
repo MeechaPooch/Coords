@@ -1,26 +1,25 @@
 package meechapooch.coords;
 
+import meechapooch.coords.commands.AddCommand;
 import meechapooch.coords.commands.HelpCommand;
+import meechapooch.coords.commands.RemoveCommand;
 import meechapooch.coords.commands.SubCommand;
 import meechapooch.coords.database.CoordsList;
 import meechapooch.coords.database.FileSaving;
 import meechapooch.coords.database.PlayerProfile;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.Console;
-import java.nio.file.Files;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public final class Coords extends JavaPlugin {
 
@@ -33,7 +32,6 @@ public final class Coords extends JavaPlugin {
     public void onEnable() {
         plugin = this;
 
-//        p.spigot().sendMessage(ChatMessageType.ACTION_BAR,new TextComponent("Test"));
         getLogger().info("YEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEET!");
 
         FileSaving.setupFileLocation();
@@ -56,11 +54,11 @@ public final class Coords extends JavaPlugin {
         FileSaving.writeDatabase();
     }
 
-    static HashMap<String, SubCommand> subCommands = new HashMap<>();
+    public static HashMap<String, SubCommand> subCommands = new HashMap<>();
     static {
         subCommands.put("help",new HelpCommand());
-        subCommands.put("add",new HelpCommand());
-        subCommands.put("remove",new HelpCommand());
+        subCommands.put("add",new AddCommand());
+        subCommands.put("remove",new RemoveCommand());
         subCommands.put("guide",new HelpCommand());
         subCommands.put("lists",new HelpCommand());
         subCommands.put("list",new HelpCommand());
@@ -69,18 +67,47 @@ public final class Coords extends JavaPlugin {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if(args.length == 0) return false;
         String commandName = args[0].toLowerCase();
         SubCommand subCommand = subCommands.get(commandName);
         if(subCommand == null) {
             sender.sendMessage(commandName + " is not a valid subcommand you stoumpugening dilt!");
             return false;
         }
-        else if(sender instanceof ConsoleCommandSender && !subCommand.isSonsoleCompatible()) {
+        else if(sender instanceof ConsoleCommandSender && !subCommand.isConsoleCompatible()) {
             sender.sendMessage("You cant run that command from the console you merping freak");
-            return false;
+            return true;
         }
         else {
-            return subCommand.run(sender, Arrays.copyOfRange(args,1,args.length));
+            String error = subCommand.run(sender, profiles.get(sender.getName().toLowerCase()), Arrays.copyOfRange(args,1,args.length));
+            if(error == null) return true;
+            else if (error.equals("")) {
+                sender.sendMessage(ChatColor.DARK_RED + "Unknown error! Run /coords help <command>");
+                return true;
+            }
+            else {
+                sender.sendMessage(ChatColor.DARK_RED + error);
+                return true;
+            }
+        }
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        if(args.length == 1) {
+            return subCommands.keySet().stream().filter((String string)->string.startsWith(args[0])).collect(Collectors.toList());
+        }
+        String commandName = args[0].toLowerCase();
+        SubCommand subCommand = subCommands.get(commandName);
+        if(subCommand == null) {
+            return null;
+        }
+        else if(sender instanceof ConsoleCommandSender && !subCommand.isConsoleCompatible()) {
+            return null;
+        }
+        else {
+            List<String> bois = subCommand.autoComplete(sender, profiles.get(sender.getName().toLowerCase()),Arrays.copyOfRange(args,1,args.length));
+            return bois == null ? new LinkedList<>() : bois.stream().filter((String string)->string.toLowerCase().startsWith(args[args.length-1].toLowerCase())).collect(Collectors.toList());
         }
     }
 
