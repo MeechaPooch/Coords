@@ -3,7 +3,6 @@ package meechapooch.coords.database;
 import meechapooch.coords.Coords;
 import meechapooch.coords.utils.FileUtils;
 import meechapooch.coords.utils.JsonThing;
-import org.bukkit.WorldType;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +25,7 @@ public class FileSaving {
         // Index
         JsonThing index = JsonThing.newList();
         Coords.index.forEach((id,list)->{
-            JsonThing listJson = JsonThing.newList();
+            JsonThing listJson = JsonThing.newMap();
             listJson.put("id",list.id);
             listJson.put("name",list.getName());
             listJson.put("public",list.isPublic);
@@ -71,7 +70,7 @@ public class FileSaving {
         container.put("profiles",profiles);
 
         try {
-            String JsonString = container.toJson();
+            String JsonString = container.toPrettyJson();
             FileUtils.writeString(SAVE_PATH,JsonString);
         } catch (IOException e) {
             System.out.println("Database Save IO Error");

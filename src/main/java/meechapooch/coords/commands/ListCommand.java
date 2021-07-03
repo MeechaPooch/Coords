@@ -1,12 +1,17 @@
 package meechapooch.coords.commands;
 
-import meechapooch.coords.database.CoordEntry;
 import meechapooch.coords.database.PlayerProfile;
 import org.bukkit.command.CommandSender;
 
+import java.util.Arrays;
 import java.util.List;
 
-public class GuideCommand implements SubCommand {
+public class ListCommand extends CommandContainer {
+
+//    public ListsCommand() {
+//        subCommands.put();
+//    }
+
     @Override
     public boolean isConsoleCompatible() {
         return false;
@@ -14,20 +19,18 @@ public class GuideCommand implements SubCommand {
 
     @Override
     public String run(CommandSender sender, PlayerProfile profile, String[] args) {
-        if(args.length == 1) {
-            CoordEntry coord = profile.getCoordEntry(args[0]);
-            if(coord == null) return "Cannot find coord " + args[0];
-            profile.startGuide(coord.coord);
-            return null;
-        }
         return null;
     }
 
     @Override
+    public String getNoCommandsMessage() {
+        return "Enter a valid list subcommand: (add | remove)";
+    }
+
+    @Override
     public List<String> autoComplete(CommandSender sender, PlayerProfile profile, String[] args) {
-        if(args.length == 1) {
-            return profile.getAllPaths();
-        }
+        if(args.length == 1) return profile.getListNames();
         return null;
+//        if(args.length == 2) return super.autoComplete(sender,profile, Arrays.copyOfRange(args,1,args.length));
     }
 }

@@ -1,9 +1,11 @@
 package meechapooch.coords.commands;
 
+import meechapooch.coords.database.CoordEntry;
 import meechapooch.coords.database.FileSaving;
 import meechapooch.coords.database.PlayerProfile;
 import org.bukkit.command.CommandSender;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,12 +18,14 @@ public class RemoveCommand implements SubCommand {
     @Override
     public String run(CommandSender sender, PlayerProfile profile, String[] args) {
         if(args.length == 1) {
-            if(profile.personal.containsKey(args[0].toLowerCase())) {
-                profile.personal.remove(args[0].toLowerCase());
+            HashMap<String, CoordEntry> list = profile.resolve(args[0]);
+            if(list == null) return "List does not exist";
+            if(list.containsKey(args[0].toLowerCase())) {
+                list.remove(args[0].toLowerCase());
                 FileSaving.writeDatabase();
                 return null;
             } else {
-                return "You dont have a personal entry named " + args[0];
+                return "Selected coordinate does not exist.";
             }
         }
         return "";
@@ -30,7 +34,7 @@ public class RemoveCommand implements SubCommand {
     @Override
     public List<String> autoComplete(CommandSender sender, PlayerProfile profile, String[] args) {
         if(args.length == 1) {
-            return profile.personal.values().stream().map((coord)->coord.getName()).collect(Collectors.toList());
+            return profile.getAllPaths();
         }
         return null;
     }

@@ -9,9 +9,9 @@ import java.util.List;
 public class CoordsList {
 
     String name;
-    int id;
+    public int id;
     HashMap<String,CoordEntry> coords = new HashMap<>();
-    boolean isPublic;
+    public boolean isPublic;
 
     public CoordsList(String name, int id, boolean isPublic) {
         this.name = name;

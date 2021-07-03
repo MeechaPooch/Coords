@@ -140,6 +140,9 @@ public class JsonThing {
         return this;
     }
 
+    public String toPrettyJson() throws IOException {
+        return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(thing);
+    }
     public String toJson() throws IOException {
         return MAPPER.writeValueAsString(thing);
     }
