@@ -5,6 +5,7 @@ import org.bukkit.command.CommandSender;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,4 +29,18 @@ public abstract class CommandContainer implements SubCommand {
     }
 
     public abstract String getNoCommandsMessage();
+
+    @Override
+    public String getUsage() {
+        StringBuilder usages = new StringBuilder();
+        subCommands.forEach((name,command)->usages.append("\n" + name + " " + command.getUsage()));
+        return usages.toString();
+    }
+
+    @Override
+    public LinkedList<String> getExamples() {
+        LinkedList<String> examples = new LinkedList<>();
+        subCommands.forEach((name,command)->examples.addAll(command.getExamples()));
+        return examples;
+    }
 }

@@ -6,6 +6,7 @@ import meechapooch.coords.database.PlayerProfile;
 import org.bukkit.command.CommandSender;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,5 +38,23 @@ public class RemoveCommand implements SubCommand {
             return profile.getAllPaths();
         }
         return null;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Remove coordinate from personal list or public/shared list";
+    }
+
+    @Override
+    public String getUsage() {
+        return "<entry name/path>";
+    }
+
+    @Override
+    public LinkedList<String> getExamples() {
+        LinkedList<String> examples = new LinkedList<>();
+        examples.add("starterhome");
+        examples.add("bases/blockers9");
+        return examples;
     }
 }

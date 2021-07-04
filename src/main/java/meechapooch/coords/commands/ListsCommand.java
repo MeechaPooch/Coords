@@ -6,6 +6,7 @@ import meechapooch.coords.commands.lists.MakeCommand;
 import meechapooch.coords.commands.lists.ShareCommand;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class ListsCommand extends CommandContainer{
 
@@ -24,5 +25,10 @@ public class ListsCommand extends CommandContainer{
     @Override
     public boolean isConsoleCompatible() {
         return false;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Parent command to make, delete and share lists";
     }
 }

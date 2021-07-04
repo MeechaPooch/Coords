@@ -89,4 +89,24 @@ public class AddCommand implements SubCommand {
             return ret;
         } else return null;
     }
+
+    @Override
+    public String getDescription() {
+        return "Adds a named coordinate entry to a personal or shared/public list";
+    }
+
+    @Override
+    public String getUsage() {
+        return "<coordinate name/path> [ ~ | <x> <y> <z> | <existing coordinate path>]";
+    }
+
+    @Override
+    public LinkedList<String> getExamples() {
+        LinkedList<String> examples = new LinkedList<>();
+        examples.add("beautiful-clearing ~");
+        examples.add("spawn 0 64 0");
+        examples.add("bases/PokeNinjaGuy ~");
+        examples.add("bases/ebonboyger friends/dylan");
+        return examples;
+    }
 }

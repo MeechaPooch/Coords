@@ -147,9 +147,11 @@ public final class Coords extends JavaPlugin {
         for (String pName : players) {
             PlayerProfile profile = profiles.get(pName);
             if(profile == null) {
-                ret += "Cannot recognize player " + pName + ".\n";
-                continue;
-            } else bois.add(profile);
+                ret += "Unknown player " + pName + ", sharing anyways.\n";
+                Coords.setupProfile(pName);
+                profile = profiles.get(pName);
+            }
+            bois.add(profile);
         }
         String hmmm = shareList(list,bois);
         if(hmmm != null) ret += hmmm;

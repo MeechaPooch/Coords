@@ -50,4 +50,23 @@ public class SendCommand implements SubCommand {
             return ret;
         } else return Coords.plugin.getServer().getOnlinePlayers().stream().map(p -> p.getName()).collect(Collectors.toList());
     }
+
+    @Override
+    public String getDescription() {
+        return "Send a coordinate to another player's personal list";
+    }
+
+    @Override
+    public String getUsage() {
+        return "[<coordinate path> | ~ ] <players>";
+    }
+
+    @Override
+    public LinkedList<String> getExamples() {
+        LinkedList<String> examples = new LinkedList<>();
+        examples.add("~ TurtleMasterPDX");
+        examples.add("mybase PokeNinjaGuy TurtleMasterPDX TrumpNotElected");
+        examples.add("secrets/secretbase PokeNinjaGuy TurtleMasterPDX TrumpNotElected");
+        return examples;
+    }
 }

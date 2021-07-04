@@ -2,6 +2,7 @@ package meechapooch.coords.commands;
 
 import meechapooch.coords.Coords;
 import meechapooch.coords.database.PlayerProfile;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
@@ -15,27 +16,21 @@ public class HelpCommand implements SubCommand {
 
     @Override
     public String run(CommandSender sender, PlayerProfile profile, String[] args) {
-        sender.sendMessage("      ========== COORDS COMMANDS ==========\n" +
-                "<CORE COMMANDS>\n" +
-                "\n" +
-                "/coords guide: guide player to saved coordinate or\n" +
-                "inputted xyz location\n" +
-                "USAGE: /coords guide <saved name, list path, or x y z coordinate>\n" +
-                "EXAMPLES:\n" +
-                "/coords guide home\n" +
-                "/coords guide 8453 57 -4324\n" +
-                "/coords guide 8453 -4324\n" +
-                "/coords guide bases/TurtleMasterPDX\n" +
-                "\n" +
-                "/coords add: add coordinate to personal list\n" +
-                "USAGE\n" +
-                "\n" +
-                "/coords remove: remove coordinate from personal list\n" +
-                "\n" +
-                "/coords send\n" +
-                "\n" +
-                "<LIST COMMANDS>\n" +
-                "\n");
+
+        if(args.length == 0) return "Input a sub-command to see help about.";
+
+        SubCommand command = Coords.subCommands.get(args[0].toLowerCase());
+        if(command == null) return "Command " + args[0] + " does not exist.";
+
+        String message = "";
+        message += "" + ChatColor.WHITE + ChatColor.UNDERLINE + ChatColor.BOLD + args[0].toUpperCase() + " COMMAND!";
+        message += "" + ChatColor.RESET + ChatColor.GOLD + ChatColor.BOLD + "\nDESCRIPTION: " + ChatColor.RESET + command.getDescription();
+        message += "" + ChatColor.RESET + ChatColor.BLUE + ChatColor.BOLD + "\nUSAGE: " + ChatColor.RESET + ChatColor.ITALIC + "/coords " + args[0].toLowerCase() + " " + command.getUsage();
+        message += "" + ChatColor.RESET + ChatColor.RED + ChatColor.BOLD + "\nEXAMPLES:" + ChatColor.RESET;
+        for(String example : command.getExamples()) {
+            message += "\n" + ChatColor.ITALIC + "/coords " + args[0].toLowerCase() + " " + example;
+        };
+        sender.sendMessage(message);
         return null;
     }
 

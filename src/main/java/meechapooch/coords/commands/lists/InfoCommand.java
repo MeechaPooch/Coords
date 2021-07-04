@@ -5,6 +5,7 @@ import meechapooch.coords.database.CoordsList;
 import meechapooch.coords.database.PlayerProfile;
 import org.bukkit.command.CommandSender;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class InfoCommand implements SubCommand {
@@ -28,5 +29,17 @@ public class InfoCommand implements SubCommand {
     public List<String> autoComplete(CommandSender sender, PlayerProfile profile, String[] args) {
         if(args.length == 1) return profile.getListNames();
         else return null;
+    }
+
+    @Override
+    public String getUsage() {
+        return "<list name>";
+    }
+
+    @Override
+    public LinkedList<String> getExamples() {
+        LinkedList<String> examples = new LinkedList<>();
+        examples.add("structures");
+        return examples;
     }
 }
