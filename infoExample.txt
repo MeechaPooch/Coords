@@ -1,0 +1,5 @@
+(private) bases:
+home | 3423, 45, -435 (nether)
+field | 3423, 45, -435
+home | 3423, 45, -435 (end)
+home | 3423, 45, -435

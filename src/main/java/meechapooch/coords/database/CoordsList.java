@@ -10,7 +10,7 @@ public class CoordsList {
 
     String name;
     public int id;
-    HashMap<String,CoordEntry> coords = new HashMap<>();
+    public HashMap<String,CoordEntry> coords = new HashMap<>();
     public boolean isPublic;
 
     public CoordsList(String name, int id, boolean isPublic) {

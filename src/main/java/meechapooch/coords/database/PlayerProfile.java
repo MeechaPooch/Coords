@@ -75,6 +75,11 @@ public class PlayerProfile {
         return list.getOrDefault(key, null);
     }
 
+    public boolean isOnline() {
+        Player player = getPlayer();
+        return player != null && player.isOnline();
+    }
+
     public CoordEntry getCoordEntry(String path) {
         return getCoordEntry(path.split("/"));
     }

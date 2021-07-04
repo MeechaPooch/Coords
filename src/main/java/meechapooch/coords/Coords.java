@@ -58,9 +58,10 @@ public final class Coords extends JavaPlugin {
         subCommands.put("add", new AddCommand());
         subCommands.put("remove", new RemoveCommand());
         subCommands.put("guide", new GuideCommand());
-        subCommands.put("stop", new CancelCommand());
+        subCommands.put("stop", new StopCommand());
         subCommands.put("lists", new ListsCommand());
-        subCommands.put("send", new HelpCommand());
+        subCommands.put("send", new SendCommand());
+        subCommands.put("personalinfo", new InfoCommand());
     }
 
     @Override

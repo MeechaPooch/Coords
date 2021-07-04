@@ -1,6 +1,7 @@
 package meechapooch.coords.commands.lists;
 
 import meechapooch.coords.commands.SubCommand;
+import meechapooch.coords.database.CoordsList;
 import meechapooch.coords.database.PlayerProfile;
 import org.bukkit.command.CommandSender;
 
@@ -14,7 +15,13 @@ public class InfoCommand implements SubCommand {
 
     @Override
     public String run(CommandSender sender, PlayerProfile profile, String[] args) {
-        return null;
+        if(args.length == 1) {
+            CoordsList list = profile.getList(args[0]);
+            if(list == null) return "Cannot find list " + args[0] + ".";
+            sender.sendMessage("(" + (list.isPublic ? "private" : "public" ) + ") " + list.getName() + ":");
+            list.coords.forEach((k,coord)->sender.sendMessage(coord.getInfo()));
+            return null;
+        } else return "Too many arguments, just input a single list name";
     }
 
     @Override
