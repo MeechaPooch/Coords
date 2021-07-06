@@ -22,7 +22,7 @@ public class CoordEntry {
     public String getInfo() {
         String ret = "" + ChatColor.RESET + getName() + " [" + ChatColor.BOLD + coord.getBlockX() + ", " + coord.getBlockY() + ", " + coord.getBlockZ() + ChatColor.RESET + "]";
         if(coord.getWorld().getName().equals("world_nether")) ret += "" + ChatColor.RED + ChatColor.BOLD + " (nether)";
-        if(coord.getWorld().getName().equals("world_the_end")) ret += "" + ChatColor.BLACK + ChatColor.BOLD + " (end)";
+        if(coord.getWorld().getName().equals("world_the_end")) ret += "" + ChatColor.BLUE + ChatColor.BOLD + " (end)";
         return ret;
     }
 
