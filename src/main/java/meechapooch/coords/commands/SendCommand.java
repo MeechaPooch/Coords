@@ -36,6 +36,7 @@ public class SendCommand implements SubCommand {
                     recipient.getPlayer().sendMessage(sender.getName() + " sent you a coordinate: " + toSend.getName());
                 }
             }
+            profile.getPlayer().sendMessage("Sent coord as " + toSend.name);
             if(err.equals("")) return null;
             else return err;
         } else return "Must input recipients! /coords send <coordname or '~'> <players>";

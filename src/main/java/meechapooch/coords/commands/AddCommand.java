@@ -46,11 +46,13 @@ public class AddCommand implements SubCommand {
                      Location location = player.getLocation();
                      list.put(coordName.toLowerCase(), new CoordEntry(coordName, player.getWorld(), location.getX(), location.getY(), location.getZ()));
                      FileSaving.writeDatabase();
+                     profile.getPlayer().sendMessage("Coord " + args[0] + " added");
                      return null;
                  } else if (profile.hasCoord(args[1])) {
                      Location location = profile.getCoordEntry(args[1]).coord;
                      list.put(coordName.toLowerCase(), new CoordEntry(coordName, player.getWorld(), location.getX(), location.getY(), location.getZ()));
                      FileSaving.writeDatabase();
+                     profile.getPlayer().sendMessage("Coord " + args[1] + " duplicated to" + args[0]);
                      return null;
                  } else {
                      return args[1] + " is not a valid position argument-- must be ~, a path to/name of an existing coordinate, or three numbers separated by spaces";
@@ -59,6 +61,7 @@ public class AddCommand implements SubCommand {
                  try {
                      list.put(coordName.toLowerCase(), new CoordEntry(coordName, player.getWorld(), Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3])));
                      FileSaving.writeDatabase();
+                     profile.getPlayer().sendMessage("Coord " + args[0] + " added");
                      return null;
                  } catch (NumberFormatException e) {
                      return "All three position arguments must be numbers";

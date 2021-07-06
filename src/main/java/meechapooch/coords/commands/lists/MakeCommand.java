@@ -17,6 +17,7 @@ public class MakeCommand implements SubCommand {
 
     @Override
     public String run(CommandSender sender, PlayerProfile profile, String[] args) {
+        sender.sendMessage("Making list " + args[0] + "...");
         if(args.length == 1) return profile.makeNewList(args[0],false);
         else if (args.length == 2) {
             if(args[1].equals("public")) return profile.makeNewList(args[0],true);

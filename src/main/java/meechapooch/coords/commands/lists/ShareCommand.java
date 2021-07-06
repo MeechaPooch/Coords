@@ -21,6 +21,7 @@ public class ShareCommand implements SubCommand {
         if(args.length == 1) return "Must specify players to share with";
         String listName = args[0];
         String[] playerNames = Arrays.copyOfRange(args,1,args.length);
+        sender.sendMessage("Sharing list...");
         return profile.shareList(listName,playerNames);
     }
 
