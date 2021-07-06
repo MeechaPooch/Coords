@@ -52,7 +52,7 @@ public class AddCommand implements SubCommand {
                      Location location = profile.getCoordEntry(args[1]).coord;
                      list.put(coordName.toLowerCase(), new CoordEntry(coordName, player.getWorld(), location.getX(), location.getY(), location.getZ()));
                      FileSaving.writeDatabase();
-                     profile.getPlayer().sendMessage("Coord " + args[1] + " duplicated to" + args[0]);
+                     profile.getPlayer().sendMessage("Coord " + args[1] + " duplicated to " + args[0]);
                      return null;
                  } else {
                      return args[1] + " is not a valid position argument-- must be ~, a path to/name of an existing coordinate, or three numbers separated by spaces";
