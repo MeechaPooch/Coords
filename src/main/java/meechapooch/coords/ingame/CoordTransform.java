@@ -5,8 +5,8 @@ import org.bukkit.Location;
 
 public enum CoordTransform {
 
-    TO_OVERWORLD(8, ChatColor.GREEN + " (Overworld, scaled)"),
-    TO_NETHER(1d/8, ChatColor.RED + " (Nether, scaled)"),
+    TO_OVERWORLD(8, "" + ChatColor.RED + ChatColor.ITALIC + " (nether, scaled)"),
+    TO_NETHER(1d/8, "" + ChatColor.GREEN + ChatColor.ITALIC + " +(overworld, scaled)"),
     SAME(1,""),
     INCOMPATIBLE(1, "");
 
@@ -16,8 +16,8 @@ public enum CoordTransform {
 
     static public CoordTransform getFromNames(String player, String to) {
         if(player.equals(to)) return SAME;
-        else if (player.equals(NETHER) && to.equals(OVERWORLD)) return TO_OVERWORLD;
-        else if (player.equals(OVERWORLD) && to.equals(NETHER)) return TO_NETHER;
+        else if (player.equals(NETHER) && to.equals(OVERWORLD)) return TO_NETHER;
+        else if (player.equals(OVERWORLD) && to.equals(NETHER)) return TO_OVERWORLD;
         else return INCOMPATIBLE;
     }
 

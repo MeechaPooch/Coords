@@ -35,11 +35,14 @@ public class Guide extends BukkitRunnable {
         if(!player.isOnline()) this.cancel();
         int distance = getDistance();
         int elevation = getRelativeElevation();
+        // Todo add height term
+        //Todo add callbacks to support temp flash messages
         if(distance <= 2) {
             this.cancel();
-            if(transform == CoordTransform.SAME) new FlashingMessage(player, "Bipity Bopity, you've now trespassed someone's property!", ChatColor.WHITE, 0.5, 4).start();
-            else if(transform == CoordTransform.TO_OVERWORLD) new FlashingMessage(player, "Go to the nether!", ChatColor.RED, 0.5, 4).start();
-            else new FlashingMessage(player, "Go to the overworld!", ChatColor.GREEN, 0.5, 4).start();
+            //Todo call back to this guide task after player has switched dimensions
+            if(transform == CoordTransform.SAME) new FlashingMessage(player, "Bipity Bopity, you've now trespassed someone's property!", ChatColor.WHITE, 0.5, 2).start();
+            else if(transform == CoordTransform.TO_OVERWORLD) new FlashingMessage(player, "Go to the nether!", ChatColor.RED, 0.5, 3).start();
+            else new FlashingMessage(player, "Go to the overworld!", ChatColor.GREEN, 0.5, 3).start();
         }
         color = (distance > 1000 ? ChatColor.RED : distance>200 ? ChatColor.GOLD : ChatColor.GREEN);
         player.spigot().sendMessage(ChatMessageType.ACTION_BAR,new TextComponent(

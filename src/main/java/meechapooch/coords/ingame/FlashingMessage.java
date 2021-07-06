@@ -36,6 +36,7 @@ public class FlashingMessage extends BukkitRunnable {
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(""));
                 repCount++;
             }
+            on = !on;
         }
     }
 
