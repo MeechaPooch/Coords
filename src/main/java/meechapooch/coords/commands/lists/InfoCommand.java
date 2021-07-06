@@ -26,7 +26,8 @@ public class InfoCommand implements SubCommand {
             message.append("" + ChatColor.BOLD + ChatColor.UNDERLINE + list.getName() + ChatColor.RESET + ChatColor.BOLD + ":");
             AtomicInteger i = new AtomicInteger(0);
             list.coords.forEach((k,coord)->message.append("\n" + (i.getAndIncrement()%2==0 ? ChatColor.AQUA :ChatColor.DARK_AQUA) + i.get() + ". " + ChatColor.RESET + coord.getInfo()));
-            return message.toString();
+            sender.sendMessage(message.toString());
+            return null;
         } else return "Too many arguments, just input a single list name";
     }
 
