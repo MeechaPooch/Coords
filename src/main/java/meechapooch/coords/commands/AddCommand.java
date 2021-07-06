@@ -78,7 +78,7 @@ public class AddCommand implements SubCommand {
             ret.add("~");
             ret.add("0");
             ret.add(Randomz.intRange(-3000,3000) + "");
-            ret.addAll(profile.getListNames().stream().map(listName->listName+"/").collect(Collectors.toList()));
+            ret.addAll(profile.getAllPaths());
             return ret;
         } else if(args.length == 3) {
             LinkedList<String> ret = new LinkedList<>();
