@@ -1,6 +1,7 @@
 package meechapooch.coords.database;
 
 import meechapooch.coords.Coords;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.WorldType;
@@ -19,9 +20,9 @@ public class CoordEntry {
     }
 
     public String getInfo() {
-        String ret = getName() + " - " + coord.getX() + ", " + coord.getY() + ", " + coord.getZ();
-        if(coord.getWorld().getName().equals("world_nether")) ret += " (nether)";
-        if(coord.getWorld().getName().equals("world_the_end")) ret += " (end)";
+        String ret = "" + ChatColor.RESET + getName() + " [" + ChatColor.BOLD + coord.getBlockX() + ", " + coord.getBlockY() + ", " + coord.getBlockZ() + ChatColor.RESET + "]";
+        if(coord.getWorld().getName().equals("world_nether")) ret += "" + ChatColor.RED + ChatColor.BOLD + " (nether)";
+        if(coord.getWorld().getName().equals("world_the_end")) ret += "" + ChatColor.BLACK + ChatColor.BOLD + " (end)";
         return ret;
     }
 

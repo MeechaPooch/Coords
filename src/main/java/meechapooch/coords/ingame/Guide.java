@@ -11,27 +11,42 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class Guide extends BukkitRunnable {
 
     Player player;
-    Location to;
+    Location staticTo;
+    SimpleLocation to;
     public static int HALF_WIDTH = 20;
     public static double FOV = 0.65;
     ChatColor color;
+    CoordTransform transform;
 
     public Guide(Player player, Location to) {
         this.player = player;
-        this.to = to;
+        this.staticTo = to;
     }
 
     @Override
     public void run() {
+        transform = CoordTransform.getFromNames(player.getWorld().getName(),staticTo.getWorld().getName());
+        if(transform == CoordTransform.INCOMPATIBLE) {
+            this.cancel();
+            if(staticTo.getWorld().getName().equals("world") || staticTo.getWorld().getName().equals("world_nether")) new FlashingMessage(player,"Go to overworld or nether",ChatColor.RED,.3,5).start();
+            else new FlashingMessage(player,"Go to End",ChatColor.BLUE,.3,5).start();
+        }
+        to = transform.getTransformedLocation(staticTo);
         if(!player.isOnline()) this.cancel();
         int distance = getDistance();
         int elevation = getRelativeElevation();
+        if(distance <= 2) {
+            this.cancel();
+            if(transform == CoordTransform.SAME) new FlashingMessage(player, "Bipity Bopity, you've now trespassed someone's property!", ChatColor.WHITE, 0.5, 4).start();
+            else if(transform == CoordTransform.TO_OVERWORLD) new FlashingMessage(player, "Go to the nether!", ChatColor.RED, 0.5, 4).start();
+            else new FlashingMessage(player, "Go to the overworld!", ChatColor.GREEN, 0.5, 4).start();
+        }
         color = (distance > 1000 ? ChatColor.RED : distance>200 ? ChatColor.GOLD : ChatColor.GREEN);
         player.spigot().sendMessage(ChatMessageType.ACTION_BAR,new TextComponent(
                 color.toString() + distance + "m "
                 + buildBar(getArrowIndex())
                 + " " + color.toString() + (elevation > 0 ? "▲" : elevation == 0 ? "■" : "▼")
-                + " " + elevation + "m"
+                + " " + elevation + "m" + transform.getAppend()
         ));
     }
 

@@ -47,7 +47,7 @@ public class GuideCommand implements SubCommand {
         LinkedList<String> examples = new LinkedList<>();
         examples.add("mybase");
         examples.add("monuments/jungletemple1");
-        examples.add("4200 69 80085");
+        examples.add("-4200 69 80085");
         return examples;
     }
 }
