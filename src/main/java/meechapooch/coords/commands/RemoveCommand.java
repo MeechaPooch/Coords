@@ -19,11 +19,13 @@ public class RemoveCommand implements SubCommand {
     @Override
     public String run(CommandSender sender, PlayerProfile profile, String[] args) {
         if(args.length == 1) {
-            HashMap<String, CoordEntry> list = profile.resolve(args[0]);
+            String[] path = args[0].split("/");
+            HashMap<String, CoordEntry> list = profile.resolve(path);
             if(list == null) return "List does not exist";
-            if(list.containsKey(args[0].toLowerCase())) {
-                list.remove(args[0].toLowerCase());
+            if(list.containsKey(path[path.length-1].toLowerCase())) {
+                list.remove(path[path.length-1].toLowerCase());
                 FileSaving.writeDatabase();
+                profile.getPlayer().sendMessage("Deleted " + args[0]);
                 return null;
             } else {
                 return "Selected coordinate does not exist.";
