@@ -106,6 +106,7 @@ public class FileSaving {
                         newList.coords.put(newCoord.getName().toLowerCase(),newCoord);
                     });
                     Coords.index.put(newList.id,newList);
+                    if(newList.isPublic) Coords.publicLists.put(newList.getName().toLowerCase(),newList);
                 });
 
                 // Build Profiles
