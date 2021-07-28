@@ -26,12 +26,12 @@ public class SendCommand implements SubCommand {
             } else toSend = profile.getCoordEntry(args[0]);
             if(toSend == null) return "Could not find coordinate " + args[0] + ".";
             String err = "";
+            toSend = new CoordEntry(toSend.name + "(shared)",toSend.coord);
             for (int i = 1; i < args.length; i++) {
                 PlayerProfile recipient = Coords.profiles.get(args[i].toLowerCase());
                 if(recipient == null) err += "Could not find player " + args[i] + ".\n";
                 else if(!recipient.isOnline()) err += recipient.name + " is not online.\n";
                 else {
-                    toSend = new CoordEntry(toSend.name + "(shared)",toSend.coord);
                     recipient.personal.put(toSend.name.toLowerCase(),toSend);
                     recipient.getPlayer().sendMessage(sender.getName() + " sent you a coordinate: " + toSend.getName());
                 }
