@@ -10,15 +10,15 @@ YT Vid: https://youtu.be/96923pUcRao
 ![image](https://user-images.githubusercontent.com/55720333/128630757-0df03590-aced-42f1-868f-5eebb1708a50.png)
 
 [ List of commands: ]
-/coords help <subcommmand>
-/coords guide <coord name/path>
-/coords add
-/coords remove
-/coords personalinfo
-/coords lists
-  /coords lists make
-  /coords lists delete
-  /coords lists share
-  /coords lists info
+- /coords help <subcommmand>
+- /coords guide <coord name/path>
+- /coords add
+- /coords remove
+- /coords personalinfo
+- /coords lists
+  - /coords lists make
+  - /coords lists delete
+  - /coords lists share
+  - /coords lists info
 
-\*Documentation Coming Soon...
+\*Full Documentation Coming Soon...
