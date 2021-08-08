@@ -14,6 +14,7 @@ YT Vid: https://youtu.be/96923pUcRao
 - /coords guide <coord name/path>
 - /coords add
 - /coords remove
+- /coords send
 - /coords personalinfo
 - /coords lists
   - /coords lists make
